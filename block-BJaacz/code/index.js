@@ -112,25 +112,15 @@ console.log(changeArray([1, 2, 3, 4, 5, 6], addFive));
     console.log(sendMessage("Hello Prompt!", prompt));
 */
 
-function sayLog(str) {
-  return console.log(str)
-}
 
-function sayAlert(str) {
-  return alert(str)
-}
-
-function sayPrompt(str) {
-  return  prompt(str)
-}
 
 function sendMessage(str,cb) {
   return cb(str);
 }
 
-console.log(sendMessage("Hello",sayLog));
-console.log(sendMessage("Hello Alert!", sayAlert));
-console.log(sendMessage("Hello Prompt!", sayPrompt));
+console.log(sendMessage("Hello", console.log));
+console.log(sendMessage("Hello Alert!", alert));
+console.log(sendMessage("Hello Prompt!", prompt));
 
 
 /*
@@ -155,11 +145,11 @@ function second() {
   function third(number) {
     return number + 1;
   }
-  return third
+  return third;
 }
 
 let add10 = second();
-console.log(add10(10));
+console.log(add10());
 /*
  Write a function named `callMe` which 
   - accept a function (callback function) as argument.
@@ -169,18 +159,15 @@ console.log(add10(10));
 */
 
 
-function aregumentToCallme(num) {
-  return num;
-}
+
 
 
 function callMe(fn) {
-  let final = [];
-  final.push(aregumentToCallme(30));
+  let final = fn();
   return final;
 }
 
-console.log(callMe(aregumentToCallme));
+let test = callMe(function(){return 21;});
 
 
 
@@ -219,11 +206,7 @@ const grades = [
 
 function isAdult(arr) {
  
-  if (arr.age > 18) {
-    return true;
-  }	else {
-    return false;
-  }
+  return arr.age > 18;
 }
 
 /*
@@ -239,11 +222,7 @@ function isAdult(arr) {
 
 function isMale(arr) {
  
-  if (arr.sex === `M`) {
-    return true;
-  }	else {
-    return false;
-  }
+  return arr.sex === `M`;
 }
 
 console.log(isMale(grades[0]));
@@ -263,11 +242,7 @@ console.log(isMale(grades[0]));
 
 function isFemale(arr) {
  
-  if (arr.sex === `F`) {
-    return true;
-  }	else {
-    return false;
-  }
+  return arr.sex === `F`;
 }
 
 
@@ -286,11 +261,7 @@ function isFemale(arr) {
 
 function isGradeA(arr) {
  
-  if (arr.grade > 12) {
-    return true;
-  }	else {
-    return false;
-  }
+  return arr.grade > 12;
 }
 
 console.log(isGradeA(grades[2])); 
@@ -310,11 +281,8 @@ console.log(isGradeA(grades[2]));
 
 function isGradeB(arr) {
  
-  if (arr.grade >= 8 && arr.grade <= 12){
-    return true;
-  }	else {
-    return false;
-  }
+  return arr.grade > 8 && arr.grade <= 12;
+    
 }
 
 console.log(isGradeB(grades[1])); 
@@ -334,11 +302,8 @@ console.log(isGradeB(grades[1]));
 
 function isGradeC(arr) {
  
-  if (arr.grade < 8){
-    return true;
-  }	else {
-    return false;
-  }
+  return arr.grade <= 8;
+
 }
 
 console.log(isGradeC(grades[1])); 
@@ -364,7 +329,7 @@ console.log(isGradeC(grades[1]));
 function filterAdult(people) {
   let finalArray = [];
   for (let person of people) {
-  	if (isAdult(person) === true) {
+  	if (isAdult(person)) {
   	finalArray.push(person);
   }
   }
@@ -399,7 +364,7 @@ console.log(filterAdult(people));
 function filterMale(grades) {
   let finalArray = [];
   for (let person of grades) {
-    if (isMale(person) === true) {
+    if (isMale(person)) {
     finalArray.push(person);
     }
   }	
@@ -467,7 +432,7 @@ console.log(filterFemale(grades));
 function filterGradeA(grades) {
   let finalArray = [];
   for(let one of grades) {
-    if(isGradeA(one) === true) {
+    if(isGradeA(one)) {
       finalArray.push(one)
     }
   } return finalArray
@@ -500,7 +465,7 @@ console.log(filterGradeA(grades));
 function filterGradeB(grades) {
   let finalArray = [];
   for(let one of grades) {
-    if(isGradeB(one) === true) {
+    if(isGradeB(one)) {
       finalArray.push(one)
     }
   } return finalArray
@@ -532,7 +497,7 @@ console.log(filterGradeB(grades));
 function filterGradeC(grades) {
   let finalArray = [];
   for(let one of grades) {
-    if(isGradeC(one) === true) {
+    if(isGradeC(one)) {
       finalArray.push(one)
     }
   } return finalArray
@@ -567,7 +532,7 @@ function filter(arr,cb) {
   let finalArray = [];
 
   for(let one of arr) {
-    if (cb(one) === true) {
+    if (cb(one)) {
       finalArray.push(one);
     }
     
