@@ -5,12 +5,12 @@ console.log(`The length of message is ${message.length}`);
 
 
 // Log the character at index 0 of the variable message like `The first character of [message] is [character]`
-let firstcharachter = message.split("");
-console.log(`The first character of message is ${firstcharachter[0]}`);
+
+console.log(`The first character of message is ${message.charAt(0)}`);
 
 
 // Log the last character of message using length like `The last character of [message] is [character]`
-console.log(`The first character of message is ${firstcharachter[firstcharachter.length - 1]}`);
+console.log(`The first character of message is ${message.charAt(message.length - 1)}`);
 
 
 // Log the index of word "you" in message
@@ -26,39 +26,40 @@ console.log(message.indexOf("answer"));
 
 
 // Log true or false based on whether the word "answers" exist in message or not
-console.log(message.includes("answer"));
+console.log(message.includes("answers"));
+console.log(message.indexOf("answers") !== -1, "second");
 
 
 // Log true or false based on whether the word "they" exist in message or not
 console.log(message.includes("they"));
-
+console.log(message.indexOf("they") !== -1, "second");
 
 // Log true or false based on whether the word "is" exist in message or not
 console.log(message.includes("is"));
-
+console.log(message.indexOf("is") !== -1, "second");
 
 // Log true or false based on whether the word "Is" exist in message or not
 console.log(message.includes("Is"));
-
+console.log(message.indexOf("Is") !== -1, "second");
 
 // Check and log whether the word from index 3 to 6 is "you" or not (use slice)
-let word = message.slice(3,6);
-console.log(word.endsWith("you"));
+
+console.log(message.slice(3,6) === "you");
 
 
 // Check and log whether the word from index 7 to 8 is "a" or not
-word = message.slice(7,8);
-console.log(word.endsWith("a"));
+
+console.log(message.slice(7,8) === "a");
 
 
 // Check and log whether the last 3 character in message is "no!" or not (you can use -3 in slice)
-word = message.slice(-3)
-console.log(word.endsWith("no!"));
+
+console.log(message.slice(-3) === "no!");
 
 
 // Check and log whether the last 5 character in message is "no!" or not
-word = message.slice(-5)
-console.log(word.endsWith("no!"));
+
+console.log(message.slice(-5) === "no!");
 
 
 // Log the message variable, all in lowecase
@@ -95,4 +96,7 @@ for(let one of message) {
 let messageArray = message.split(" ");
 
 // Log all the words of messageArray
-console.log(messageArray);
+for(let word of messageArray) {
+    console.log(word);
+}
+
