@@ -20,17 +20,20 @@ numbers.lastIndexOf(9);
 
 // - Convert value of strings array into a sentance like "This is a collection of words"
 
-let final =  strings.reduce((acc,val) => {return acc + " " + val }, "")
+//let final1 =  strings.reduce((acc,val) => {return acc + " " + val }, "");
+strings.join(" ");
 
 
 // - Add two new words in the strings array "called" and "sentance"
 
 strings.push("called", "sentance");
-
+// strings.splice(0,0,"called", "sentance");
+// strings.splice(strings.length,0,"called", "sentance");
 
 // - Again convert the updated array (strings) into sentance like "This is a collection of words called sentance"
 
-final =  strings.reduce((acc,val) => {return acc + " " + val }, "")
+strings.join(" ");
+//final =  strings.reduce((acc,val) => {return acc + " " + val }, "")
 
 
 // - Remove the first word in the array (strings)
@@ -44,7 +47,7 @@ let wordIs = strings.filter(val => {return val.includes("is")});
 
 // - Find all the words that contain 'is' use string method 'indexOf'
 
-
+let isAllAgain = strings.filter((String) => String.indexOf("is") !== -1);
 
 
 
@@ -59,10 +62,7 @@ let divByThree = numbers.every((num) => {return num % 3 === 0});
 
 let newNumbers = [...numbers];
 
-function compareFunction(a, b) {
-  return a - b ;
-}
-newNumbers.sort(compareFunction)
+newNumbers.sort((a,b) => a - b)
 
 
 // - Remove the last word in strings
@@ -79,6 +79,7 @@ for (let i = 1; i < numbers.length; i++) {
   }
 }
 
+let largestnum = newNumbers.sort((a,b) => a - b).pop();
 
 
 // - Find longest string in strings
@@ -91,6 +92,7 @@ for (let i = 0; i < strings.length; i++) {
   } 
 }
 
+let logestString1 = strings.sort((a,b) => a.length - b.length).pop();
 
 // - Find all the even numbers
 
@@ -110,11 +112,12 @@ strings.unshift("John");
 // - Make a subset of numbers array [18,9,7,11]
 
 let newNumbersArray = [...numbers]
-newNumbersArray.splice(newNumbersArray.indexOf(18),4,[18,9,7,11]);
+let numbersSpliced = newNumbersArray.splice(newNumbersArray.indexOf(18),4,[18,9,7,11]);
+
 
 
 // - Make a subset of strings array ['a','collection']
-
+console.log(strings);
 let newString = [...strings];
 newString.splice(newString.indexOf("a"),2,['a','collection']);
 
@@ -124,20 +127,29 @@ newString.splice(newString.indexOf("a"),2,['a','collection']);
 numbers.splice(numbers.indexOf(12),1,1221);
 numbers.splice(numbers.indexOf(18),1,1881)
 
+numbers.map((num) => {
+  if (num === 12) {
+    return 1221;
+  } else if (num === 18) {
+    return 1881;
+  }
+})
+
 
 // - Replace words in strings array with the length of the word
 
-function lengthOfArray(val) {
-  return val.length
-}
-
-let finalLength = strings.map(lengthOfArray)
+let finalLength = strings.map((val) => {return val.length})
 
 
 // - Find the sum of the length of words using above question
 
-let sumOfLength = finalLength.reduce((acc,num) => {return acc + num },0);
+let sumOfLength = finalLength.reduce((acc,num) => {return acc += num },0);
 
+let sum = 0 ;
+
+finalLength.forEach(num => {
+  sum += num ;
+})
 
 
 
@@ -147,6 +159,7 @@ var customers = [
   { firstname: 'John', lastname: 'Smith' },
   { firstname: 'Dave', lastname: 'Jones' },
   { firstname: 'Jack', lastname: 'White' },
+  { firstname: 'dfgh', lastname: 'White' },
 ];
 
 
@@ -163,43 +176,57 @@ var customers = [
 // }
 
 
-function customerOfJ(val) {
-  let valFirstName = val.firstname;
+// function customerOfJ(val) {
+//   let valFirstName = val.firstname;
 
-  if (valFirstName.startsWith("J")) {
-    return valFirstName;
-  } 
-}
-let customerStartWithJ = customers.filter(customerOfJ);
+//   if (valFirstName.startsWith("J")) {
+//     return valFirstName;
+//   } 
+// }
+let filterdCustomer = customers.filter((customer) => 
+   customer.firstname.startsWith("J")
+);
 
-console.log(customerStartWithJ);
+console.log(filterdCustomer);
 
 
 // - Create new array with only first name
 
-let onlyFirstName = [];
+// let onlyFirstName = [];
 
-function firstNameFunction(val) {
-  return onlyFirstName.push(val.firstname);
-}
+// function firstNameFunction(val) {
+//   return onlyFirstName.push(val.firstname);
+// }
 
-customers.map(firstNameFunction);
+// customers.map(firstNameFunction);
 
-console.log(onlyFirstName);
+// console.log(onlyFirstName);
 
+
+
+let fistNameOfCustomer = customers.map((customer) => 
+   customer.firstname
+);
+
+console.log(fistNameOfCustomer);
 
 
 // - Create new array with all the full names (ex: "Joe Blogs")
 
-let fullName = [];
+// let fullName = [];
 
-function fullNameFunction(val) {
-  return fullName.push(`${val.firstname} ${val.lastname}`);
-}
+// function fullNameFunction(val) {
+//   return fullName.push(`${val.firstname} ${val.lastname}`);
+// }
 
-customers.map(fullNameFunction);
+// customers.map(fullNameFunction);
 
-console.log(fullName);
+// console.log(fullName);
+
+
+let fullNameOfCustomer = customers.map( (customer) =>
+  `${customer.firstname} ${customer.lastname}`
+)
 
 
 // - Sort the array created above alphabetically
@@ -209,31 +236,42 @@ console.log(fullName.sort());
 
 // - Create a new array that contains only user who has at least one vowel in the firstname.
 
-let user = [];
+// let user1 = [];
 
-function firstNameO(val) {
-  let valFirstName = val.firstname;
+// function firstNameO(val) {
+//   let valFirstName = val.firstname;
 
-  if (valFirstName.includes("a")) {
-    return user.push(val.firstname);
-  } else if (valFirstName.includes("e")) {
-    return user.push(val.firstname);
-  } else if (valFirstName.includes("i")) {
-    return user.push(val.firstname);
-  } else if (valFirstName.includes("o")) {
-    return user.push(val.firstname);
-  } else if (valFirstName.includes("u")) {
-    return user.push(val.firstname);
-  }
-}
+//   if (valFirstName.includes("a")) {
+//     return user.push(val.firstname);
+//   } else if (valFirstName.includes("e")) {
+//     return user.push(val.firstname);
+//   } else if (valFirstName.includes("i")) {
+//     return user.push(val.firstname);
+//   } else if (valFirstName.includes("o")) {
+//     return user.push(val.firstname);
+//   } else if (valFirstName.includes("u")) {
+//     return user.push(val.firstname);
+//   }
+// }
 
-customers.map(firstNameO);
-
-
+// customers.filter(firstNameO);
 
 
 
 
+
+let user = customers.filter(customer => {
+  if (customer.firstname.toLowerCase().includes("a") ||
+      customer.firstname.toLowerCase().includes("e") ||
+      customer.firstname.toLowerCase().includes("i") ||
+      customer.firstname.toLowerCase().includes("o") ||
+      customer.firstname.toLowerCase().includes("u") 
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+})
 
 
 
