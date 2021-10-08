@@ -1,36 +1,160 @@
 // NOTE: You can only use the (reduce) array method to solve this exercise:
 
 function countAllPeople() {
-  // your code goes here
+  const reducer = (sum, obj) => sum + obj.people.length;
+  return got.houses.reduce(reducer, 0);
 }
+
+
+
+
+
 
 function peopleByHouses() {
-  // your code goes here
+  let totalPeople = (acc, val) => {return acc + (`${val.name} : ${val.people.length} `)}
+   return got.houses.reduce(totalPeople,{})
 }
+
+
+
+
 
 function everyone() {
-  // your code goes here
+  const personReducer = (names, obj) => {
+   
+    names.push(obj.name);
+    return names;
+  }
+
+  const peopleReducer = (names, obj) => {
+    let newNames = obj.people.reduce(personReducer, []);
+    
+    return names.concat(newNames);
+  };
+
+  return got.houses.reduce(peopleReducer, []);
 }
+
+
+
+
 
 function nameWithS() {
-  // your code goes here
+
+  let filterNameS = (val) => {
+    return val.includes("s") || val.includes("S");
+  
+  }
+  
+  const personReducer = (names, obj) => {
+    names.push(obj.name);
+    return names.filter(filterNameS);
+  }
+
+  const peopleReducer = (names, obj) => {
+    let newNames = obj.people.reduce(personReducer, []);
+    
+    return names.concat(newNames);
+  };
+
+  return got.houses.reduce(peopleReducer, []);
 }
+
+
+
+
 
 function nameWithA() {
-  // your code goes here
+  let filterNameS = (val) => {
+    return val.includes("a") || val.includes("A");
+  
+  }
+  
+  const personReducer = (names, obj) => {
+    names.push(obj.name);
+    return names.filter(filterNameS);
+  }
+
+  const peopleReducer = (names, obj) => {
+    let newNames = obj.people.reduce(personReducer, []);
+    
+    return names.concat(newNames);
+  };
+
+  return got.houses.reduce(peopleReducer, []);
 }
+
+
+
+
 
 function surnameWithS() {
-  // your code goes here
+  let filterNameS = (val) => {
+    return val.includes("S", 1);
+  
+  }
+  
+  const personReducer = (names, obj) => {
+    names.push(obj.name);
+    return names.filter(filterNameS);
+  }
+
+  const peopleReducer = (names, obj) => {
+    let newNames = obj.people.reduce(personReducer, []);
+    
+    return names.concat(newNames);
+  };
+
+  return got.houses.reduce(peopleReducer, []);
 }
+
+
+
+
 
 function surnameWithA() {
-  // your code goes here
+  let filterNameS = (val) => {
+    return val.includes("A", 1);
+  
+  }
+  
+  const personReducer = (names, obj) => {
+    names.push(obj.name);
+    return names.filter(filterNameS);
+  }
+
+  const peopleReducer = (names, obj) => {
+    let newNames = obj.people.reduce(personReducer, []);
+    
+    return names.concat(newNames);
+  };
+
+  return got.houses.reduce(peopleReducer, []);
 }
 
+
+
+
+
+
 function peopleNameOfAllHouses() {
-  // your code goes here
+
+  let arrayReducer = (prev, current) => {
+    return prev.concat([current.name]);
+  }
+
+  let totalPeople = (prev, current) => {
+
+    let names = current.people.reduce(arrayReducer, []);
+    return { ...prev, [current.name]: names };
+    
+  }
+   return got.houses.reduce(totalPeople, {})
 }
+
+
+
+
 
 // Testing your result after writing your function
 console.log(countAllPeople());
@@ -63,3 +187,9 @@ console.log(surnameWithA());
 console.log(peopleNameOfAllHouses());
 // Output should be
 // {Arryns: ["Jon Arryn"], Baratheons: ["Robert Baratheon", "Stannis Baratheon", "Renly Baratheon", "Joffrey Baratheon", "Tommen Baratheon", "Myrcella Baratheon"], Dothrakis: ["Khal Drogo"], Freys: ["Walder Frey"], Greyjoys: ["Balon Greyjoy", "Theon Greyjoy", "Yara Greyjoy"], Lannisters: ["Tywin Lannister", "Tyrion Lannister", "Jaime Lannister", "Cersei Baratheon"], Redwyne: ["Olenna Tyrell"], Starks: ["Eddard Stark", "Benjen Stark", "Robb Stark", "Sansa Stark", "Arya Stark", "Brandon Stark", "Rickon Stark", "Jon Snow"], Targaryens: ["Daenerys Targaryen", "Viserys Targaryen"], Tullys: ["Catelyn Stark", "Lysa Arryn", "Edmure Tully", "Brynden Tully"], Tyrells: ["Margaery Baratheon", "Loras Tyrell"]}
+
+
+
+
+
+
