@@ -17,17 +17,46 @@ let persons = [
 
 // Find the average grade
 
+let avgGrade = persons.reduce((prev, curr) => {return prev + curr.grade}, 0) / persons.length;
+
+
 // Find the average grade of male
+
+let maleGrade = persons.filter((val) => {return val.sex === "M"}).map((person) => person.grade);
+
+let avgMaleGrade = maleGrade.reduce((prev, curr) => {return prev + curr}, 0) / maleGrade.length;
+
 
 // Find the average grade of female
 
+let femaleGrade = persons.filter((val) => {return val.sex === "F"}).map((person) => person.grade );
+
+let avgFemaleGrade = femaleGrade.reduce((prev, curr) => {return prev + curr.grade}, 0) / femaleGrade.length;
+
+
 // Find the highest grade
+
+let allGrade = [...persons].map((val) => val.grade).sort((a,b) => a - b).pop();
+
 
 // Find the highest grade in male
 
+let highestMaleGrade = [...femaleGrade].sort((a, b) => a - b).pop();
+
+
 // Find the highest grade in female
 
+let highestFemaleGrade = [...maleGrade].sort((a, b) => a - b).pop();;
+
+
 // Find the highest grade for people whose name starts with 'J' or 'P'
+
+let gradeJP = persons.filter((val) => val.name.startsWith("J") || val.name.startsWith("P")).map((person) => person.grade);
+let highestGradeJP = [...gradeJP].sort((a, b) => a - b).pop();
+
+
+
+
 
 const fruitBasket = [
   'banana',
@@ -43,6 +72,17 @@ const fruitBasket = [
   'fig',
 ];
 
+function usePipeline(array, cb, iv) {
+  let acc = iv
+}
+
+
+
+
+
+
+
+
 /* 
 
 Use the fruitBasket array to create an object where key will be the fruit and value will be the number of times
@@ -51,6 +91,20 @@ that fruit has appeared in the array. Store it in new variable fruitsObj
 Output: 
 {banana: 2, cherry: 3, orange: 3, apple: 2, fig: 1}
 */
+
+let countfruits = fruitBasket.reduce((allFruits, fruit) =>  {
+  let count = 1;
+  if (allFruits[fruit] !== undefined) {
+    count = allFruits[fruit] + 1;
+  }
+
+  return {...allFruits, [fruit]: count };
+}, {})
+
+console.log(countfruits);
+
+
+
 
 /* 
 
@@ -62,6 +116,26 @@ Output:
 [['banana', 2], ['cherry', 3], ['orange', 3], ['apple', 2], ['fig', 1]]
 */
 
+
+let countfruits = fruitBasket.reduce((allFruits, fruit) =>  {
+  let final= []
+  let count = 1;
+  if (allFruits[fruit] !== undefined) {
+    count = allFruits[fruit] + 1;
+  }
+  console.log(final);
+
+  return final.push(allFruits, count);
+}, [])
+
+
+
+
+
+
+
+
+
 const data = [
   [1, 2, 3],
   [4, 5, 6],
@@ -71,6 +145,15 @@ const data = [
 
 // Using reduce flat data array
 
+let flatData = data.reduce((flatArray, array) => {
+  
+  return flatArray.concat(array);
+}, [])
+
+//console.log(flatData);
+
+
+
 const dataTwo = [
   [1, 2, 3],
   [4, 5, 6],
@@ -79,6 +162,51 @@ const dataTwo = [
 ];
 
 // Using reduce flat dataTwo array
+
+let reducer2 = (flatArray, value) => {
+  let result = flatArray;
+  
+  result.push(value);
+  return result;
+}
+
+let reducer1 = (flatArray, value) => {
+  let result = flatArray;
+  
+  if (Array.isArray(value)) {
+    let flatArray = value.reduce(reducer2, []);
+    result = result.concat(flatArray);
+  } else {
+    result.push(value);
+  }
+
+  return result;
+}
+
+
+
+let reducer = (flatArray, value) => {
+
+  let result = flatArray;
+  if (Array.isArray(value)) {
+    let flatArray = value.reduce(reducer, []);
+    result = result.concat(flatArray);
+  } else {
+    result.push(value);
+  }
+
+  return result;
+}
+
+let answer = dataTwo.reduce(reducer, []);
+console.log(answer);
+
+
+// let checkArray = flatData1.map((val) => {
+
+
+
+
 
 /*
 
@@ -90,6 +218,28 @@ Create these functions which accepts a number value and returns a number value:
   - `half` converts the value to half and return the integer value not decimal (use Math.round(21.5) => 21)
 */
 
+
+
+function increment(num) {
+  return num + 1;
+}
+
+function double(num) {
+  return num * 2;
+}
+
+function decrement(num) {
+  return num - 1;
+}
+
+function triple(num) {
+  return num * 3;
+}
+
+function half(num) {
+  return num / 2;
+}
+
 let pipeline = [
   increment,
   double,
@@ -100,6 +250,16 @@ let pipeline = [
   half,
   increment,
 ];
+
+let final = pipeline.reduce((result, func) => {
+  
+  return func(result);
+}, 3)
+
+
+//console.log(final);
+
+
 
 /*
 Using the pipeline variable that contains the collection of functions, taking the initial value 3 find the output.
@@ -114,6 +274,32 @@ EXAMPLE:
 
   ...
 */
+
+
+function increment(num) {
+  return num + 1;
+}
+
+function double(num) {
+  return num * 2;
+}
+
+function decrement(num) {
+  return num - 1;
+}
+
+function triple(num) {
+  return num * 3;
+}
+
+function half(num) {
+  return num / 2;
+}
+
+
+
+
+
 
 let pipeline2 = [
   increment,
@@ -130,3 +316,12 @@ let pipeline2 = [
 ];
 
 // Find the output using pipeline2 the initial value if 8
+
+
+let result = pipeline.reduce((result, func) => {
+  
+  return func(result);
+}, 8)
+
+
+//console.log(result);
