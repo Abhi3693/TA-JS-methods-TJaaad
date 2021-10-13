@@ -1,36 +1,137 @@
 // NOTE: You can not use reduce methods to solve this exercise
 
 function countAllPeople() {
-  // your code goes here
+
+  let value = got.houses;
+  let allPeople = 0
+  for(let val of value) {
+    allPeople += val.people.length
+    
+  }
+  return allPeople
 }
+  
+
+
+
 
 function peopleByHouses() {
-  // your code goes here
+
+  let obj = got.houses;
+  let allPeopleByHouse = {};
+  
+  for (let value of obj) {
+
+    let countPeople = value.people.length
+
+    allPeopleByHouse = {...allPeopleByHouse, [value.name] : countPeople} 
+  }
+  return allPeopleByHouse;
+
 }
+
+  
+
+
 
 function everyone() {
-  // your code goes here
+  let obj = got.houses;
+  let allPeople = [];
+
+  for (let value of obj) {
+    
+    for (let val of value.people) {
+      allPeople.push(val.name)
+    }    
+  }
+  return allPeople;
 }
 
+
+
+
+
 function nameWithS() {
-  // your code goes here
+  let obj = got.houses;
+  let allPeople = [];
+
+  for (let value of obj) {
+    
+    for (let val of value.people) {
+      if (val.name.includes("S") || val.name.includes("s")) {
+        allPeople.push(val.name)
+      }
+      
+    }    
+  }
+  return allPeople;
 }
 
 function nameWithA() {
-  // your code goes here
+  let obj = got.houses;
+  let allPeople = [];
+
+  for (let value of obj) {
+    
+    for (let val of value.people) {
+      if (val.name.includes("A") || val.name.includes("a")) {
+        allPeople.push(val.name)
+      }
+      
+    }    
+  }
+  return allPeople;
 }
 
 function surnameWithS() {
-  // your code goes here
+  let obj = got.houses;
+  let allPeople = [];
+
+  for (let value of obj) {
+    
+    for (let val of value.people) {
+      
+      if (val.name.split(" ")[1].includes("S")) {
+        allPeople.push(val.name)
+      }
+      
+    }    
+  }
+  return allPeople;
 }
 
 function surnameWithA() {
-  // your code goes here
+  let obj = got.houses;
+  let allPeople = [];
+
+  for (let value of obj) {
+    
+    for (let val of value.people) {
+      
+      if (val.name.split(" ")[1].includes("A")) {
+        allPeople.push(val.name)
+      }
+      
+    }    
+  }
+  return allPeople;
 }
 
 function peopleNameOfAllHouses() {
-  // your code goes here
-}
+  let obj = got.houses;
+  let allPeopleByHouse = {};
+  
+  for (let value of obj) {
+    let countPeople = []
+
+    for (let val of value.people) {
+      countPeople.push(val.name); 
+    }    
+
+    allPeopleByHouse = {...allPeopleByHouse, [value.name] : countPeople} 
+  }
+  return allPeopleByHouse;
+} 
 
 // Testing your result after writing your function
 console.log(countAllPeople());
@@ -38,7 +139,7 @@ console.log(countAllPeople());
 
 console.log(peopleByHouses());
 // Output should be
-//{Arryns: 1, Baratheons: 6, Dothrakis: 1, Freys: 1, Greyjoys: 3, Lannisters: 4,Redwyne: 1,Starks: 8,Targaryens: 2,Tullys: 4,Tyrells: 2}
+// //{Arryns: 1, Baratheons: 6, Dothrakis: 1, Freys: 1, Greyjoys: 3, Lannisters: 4,Redwyne: 1,Starks: 8,Targaryens: 2,Tullys: 4,Tyrells: 2}
 
 console.log(everyone());
 // Output should be
@@ -57,7 +158,7 @@ console.log(surnameWithS(), 'surname with s');
 // ["Eddard Stark", "Benjen Stark", "Robb Stark", "Sansa Stark", "Arya Stark", "Brandon Stark", "Rickon Stark", "Jon Snow", "Catelyn Stark"]
 
 console.log(surnameWithA());
-// Output should be
+// // Output should be
 // ["Lysa Arryn", "Jon Arryn"]
 
 console.log(peopleNameOfAllHouses());
