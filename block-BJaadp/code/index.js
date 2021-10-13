@@ -92,7 +92,7 @@ Output:
 {banana: 2, cherry: 3, orange: 3, apple: 2, fig: 1}
 */
 
-let countfruits = fruitBasket.reduce((allFruits, fruit) =>  {
+let fruitsObj = fruitBasket.reduce((allFruits, fruit) =>  {
   let count = 1;
   if (allFruits[fruit] !== undefined) {
     count = allFruits[fruit] + 1;
@@ -101,7 +101,7 @@ let countfruits = fruitBasket.reduce((allFruits, fruit) =>  {
   return {...allFruits, [fruit]: count };
 }, {})
 
-console.log(countfruits);
+console.log(fruitsObj);
 
 
 
@@ -117,19 +117,13 @@ Output:
 */
 
 
-let countfruits = fruitBasket.reduce((allFruits, fruit) =>  {
-  let final= []
-  let count = 1;
-  if (allFruits[fruit] !== undefined) {
-    count = allFruits[fruit] + 1;
-  }
-  console.log(final);
-
-  return final.push(allFruits, count);
+let fruitsArray = Object.keys(fruitsObj).reduce((acc, cv) => {
+  acc = acc.concat([[cv, fruitsObj[cv]]])
+  return acc;
 }, [])
 
 
-
+console.log(fruitsArray);
 
 
 
@@ -163,48 +157,32 @@ const dataTwo = [
 
 // Using reduce flat dataTwo array
 
-let reducer2 = (flatArray, value) => {
-  let result = flatArray;
+
+
+
+
+
+
+let reducer = ((flatArray, value) => {
   
-  result.push(value);
-  return result;
-}
+  let result = flatArray
 
-let reducer1 = (flatArray, value) => {
-  let result = flatArray;
-  
-  if (Array.isArray(value)) {
-    let flatArray = value.reduce(reducer2, []);
-    result = result.concat(flatArray);
-  } else {
-    result.push(value);
-  }
-
-  return result;
-}
-
-
-
-let reducer = (flatArray, value) => {
-
-  let result = flatArray;
   if (Array.isArray(value)) {
     let flatArray = value.reduce(reducer, []);
     result = result.concat(flatArray);
   } else {
-    result.push(value);
+    result.push(value)
   }
-
   return result;
-}
+})
+
+
+
+
 
 let answer = dataTwo.reduce(reducer, []);
+
 console.log(answer);
-
-
-// let checkArray = flatData1.map((val) => {
-
-
 
 
 
