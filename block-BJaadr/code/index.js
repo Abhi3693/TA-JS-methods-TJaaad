@@ -19,7 +19,9 @@ function peopleByHouses() {
 
    let totalPeople = ((prev, curr) => {
     
-       return {...prev, [curr.name] : [curr.people.length]}
+      // return {...prev, [curr.name] : [curr.people.length]}
+       prev[curr.name] = curr.people.length
+        return prev;
    })
 
    return got.houses.reduce(totalPeople, {})
@@ -53,48 +55,31 @@ function everyone() {
 
 
 function nameWithS() {
-  let final = []
-
-  let reducer2 = ((prev, curr) => {
-    if (curr.name.includes("S") || curr.name.includes("s")) {
-      final.push(curr.name)
-    }
-
-  });
   
-  let reducer1 = ((prev, curr) => {
-
-    return prev.concat(curr.people.reduce(reducer2, []))
-  });
 
 
-   got.houses.reduce(reducer1, [])
+  return got.houses.reduce((acc, house) => {
+    acc.concat(
+    house.people.map((person) => 
+    person.name).filter((name) => 
+    name.toLowerCase().includes("s")
+    )
+   );
 
-   return final
+   return acc;
+ }, [])
+
+   
 }
 
 
 
 function nameWithA() {
-  let final = []
 
-  let reducer2 = ((prev, curr) => {
-    
-    if (curr.name.includes("A") || curr.name.includes("a")) {
-      final.push(curr.name)
-    }
+  let allPeople = everyone();
 
-  });
-  
-  let reducer1 = ((prev, curr) => {
-
-    return prev.concat(curr.people.reduce(reducer2, []))
-  });
-
-
-   got.houses.reduce(reducer1, [])
-   
-   return final
+  return allPeople.filter((name) => 
+  name.toLowerCase().includes("a"))
 }
 
 
@@ -103,24 +88,11 @@ function nameWithA() {
 
 
 function surnameWithS() {
-  let final = []
-
-  let reducer2 = ((prev, curr) => {
-    if (curr.name.split(" ")[1].startsWith("S")) {
-      final.push(curr.name)
-    }
-
-  });
   
-  let reducer1 = ((prev, curr) => {
+  let allPeople = everyone();
 
-    return prev.concat(curr.people.reduce(reducer2, []))
-  });
-
-
-   got.houses.reduce(reducer1, [])
-   
-   return final
+  return allPeople.filter((name) =>
+  name.split(" ")[1].startsWith("S"))
 }
 
 
@@ -128,24 +100,17 @@ function surnameWithS() {
 
 
 function surnameWithA() {
-  let final = []
-
-  let reducer2 = ((prev, curr) => {
-    if (curr.name.split(" ")[1].startsWith("A")) {
-      final.push(curr.name)
-    }
-
-  });
   
-  let reducer1 = ((prev, curr) => {
+  return got.houses.reduce((acc, house) => {
+     acc.concat(
+     house.people.map((person) => 
+     person.name).filter((name) => 
+     name.split(" ")[1].includes("S")
+     )
+    );
 
-    return prev.concat(curr.people.reduce(reducer2, []))
-  });
-
-
-   got.houses.reduce(reducer1, [])
-   
-   return final
+    return acc;
+  }, [])
 }
 
 
@@ -155,20 +120,36 @@ function peopleNameOfAllHouses() {
 
 
 
-  let reducer2 = ((prev, curr) => {
-    return prev.concat(curr.name);
-  })
+  // let reducer2 = ((prev, curr) => {
+  //   return prev.concat(curr.name);
+  // })
 
-  let reducer1 = ((prev, curr) => {
+  // let reducer1 = ((prev, curr) => {
 
-    let name = curr.people.reduce(reducer2, [])
+  //   let name = curr.people.reduce(reducer2, [])
 
-    return {...prev, [curr.name] : name}
-  })
+  //   return {...prev, [curr.name] : name}
+  // })
 
 
-  return got.houses.reduce(reducer1, {});
+  // return got.houses.reduce(reducer1, {});
+
+
+
+  return got.houses.reduce((acc, house) => {
+
+
+    acc[house.name] = house.people.map((person) => person.name)
+    
+    return acc
+  }, {});
+  
 }
+
+
+
+
+
 
 // Testing your result after writing your function
 
